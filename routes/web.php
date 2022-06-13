@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PublisherController;
+use App\Http\Controllers\UserRequestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -64,5 +65,11 @@ Route::middleware([
         Route::get('/edit/{id}',[BookController::class,'edit'])->name('books.edit');
         Route::post('/update/{id}',[BookController::class,'update'])->name('books.update');
         Route::get('/delete/{id}',[BookController::class,'delete'])->name('books.delete');
+    });
+    // user requests
+    Route::prefix('user-requests')->group(function () {
+        Route::get('/',[UserRequestController::class,'index'])->name('user-requests.index');
+        Route::get('/approve/{id}',[UserRequestController::class,'approve'])->name('user-requests.approve');
+        Route::get('/reject/{id}',[UserRequestController::class,'reject'])->name('user-requests.reject');
     });
 });

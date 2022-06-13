@@ -7,9 +7,9 @@
                     <h1 class="author-h1">All Books</h1>
                 </div>
                 @if (Auth::user()->role == 'admin')
-                <div class="col-6">
-                    <a href="{{ route('books.create') }}" class="btn btn-info float-right">Add Book</a>
-                </div> 
+                    <div class="col-6">
+                        <a href="{{ route('books.create') }}" class="btn btn-info float-right">Add Book</a>
+                    </div>
                 @endif
             </div>
             <div class="row">
@@ -22,7 +22,9 @@
                             <th>Author</th>
                             <th>Publisher</th>
                             <th>Stock</th>
-                            <th>Action</th>
+                            @if (Auth::user()->role == 'admin')
+                                <th>Action</th>
+                            @endif
                         </thead>
                         <tbody>
                             @forelse ($books as $book)
@@ -32,13 +34,17 @@
                                     <td>{{ $book->name }}</td>
                                     <td>{{ $book->author_id ? $book->author->name : 'No Author' }}</td>
                                     <td>{{ $book->publisher_id ? $book->publisher->name : 'No Publisher' }}</td>
-                                    <td><span class="{{ $book->stock < 1 ? 'badge badge-danger' : '' }}">{{ $book->stock < 1 ? 'stock out' : $book->stock }}</span></td>
-                                    <td class="edit">
-                                        <a href="{{ route('books.edit', $book->id) }}"
-                                            class="btn btn-success m-1">Edit</a>
-                                        <a href="{{ route('books.delete', $book->id) }}"
-                                            class="btn btn-danger m-1" id="delete">Delete</a>
+                                    <td><span
+                                            class="{{ $book->stock < 1 ? 'badge badge-danger' : '' }}">{{ $book->stock < 1 ? 'stock out' : $book->stock }}</span>
                                     </td>
+                                    @if (Auth::user()->role == 'admin')
+                                        <td class="edit">
+                                            <a href="{{ route('books.edit', $book->id) }}"
+                                                class="btn btn-success m-1">Edit</a>
+                                            <a href="{{ route('books.delete', $book->id) }}"
+                                                class="btn btn-danger m-1" id="delete">Delete</a>
+                                        </td>
+                                    @endif
                                 </tr>
                             @empty
                                 <tr>
