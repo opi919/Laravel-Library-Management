@@ -42,17 +42,6 @@
 
     <div class="min-h-screen bg-gray-100">
         @livewire('navigation-menu')
-
-        <!-- Page Heading -->
-        {{-- @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif --}}
-
-        <!-- Page Content -->
         <main>
             {{ $slot }}
         </main>
@@ -98,7 +87,6 @@
     </script>
     {{-- sweet alert --}}
     <script>
-        $(document).ready(function() {
             $('#delete').click(function(e) {
                 e.preventDefault();
                 let url = $(this).attr('href');
@@ -109,14 +97,13 @@
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
+                    confirmButtonText: 'Yes, do it!'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         window.location.href = url;
                     }
                 })
             });
-        })
     </script>
 </body>
 

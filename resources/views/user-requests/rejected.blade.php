@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row pb-5">
                 <div class="col-6">
-                    <h1 class="author-h1">All Requests</h1>
+                    <h1 class="author-h1">All Rejected Requests</h1>
                 </div>
             </div>
             <div class="row">
@@ -14,7 +14,7 @@
                             <th>S.No</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th style="width: 20%">Action</th>
+                            <th>Status</th>
                         </thead>
                         <tbody>
                             <?php $i = 1; ?>
@@ -24,15 +24,8 @@
                                     <td>{{ $request->name }}</td>
                                     <td>{{ $request->email }}</td>
                                     <td class="edit">
-                                        @if ($request->status == 0)
-                                            <a href="{{ route('user-requests.approve', $request->id) }}"
-                                                class="btn btn-warning m-1">Approve</a>
-                                            <a href="{{ route('user-requests.reject', $request->id) }}"
-                                                class="btn btn-danger m-1" id="delete">Reject</a>
-                                        @elseif($request->status == 1)
-                                            <span class="badge badge-success">Approved</span>
-                                        @else
-                                            <span class="badge badge-danger">Rejected</span>
+                                        @if ($request->status == -1)
+                                        <span class="badge badge-danger">Rejected</span>
                                         @endif
                                     </td>
                                 </tr>

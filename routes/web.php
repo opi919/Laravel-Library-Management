@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\BookIssueController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\UserRequestController;
 use Illuminate\Support\Facades\Route;
@@ -17,7 +20,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//login controller
+Route::post('/login', [LoginController::class, 'verify'])->name('custom.verify');
 Route::get('/', function () {
     return redirect()->route('login');
 });
@@ -66,10 +70,20 @@ Route::middleware([
         Route::post('/update/{id}',[BookController::class,'update'])->name('books.update');
         Route::get('/delete/{id}',[BookController::class,'delete'])->name('books.delete');
     });
-    // user requests
+    // student requests
     Route::prefix('user-requests')->group(function () {
         Route::get('/',[UserRequestController::class,'index'])->name('user-requests.index');
         Route::get('/approve/{id}',[UserRequestController::class,'approve'])->name('user-requests.approve');
         Route::get('/reject/{id}',[UserRequestController::class,'reject'])->name('user-requests.reject');
+        Route::get('approved-requests',[UserRequestController::class,'approved'])->name('user-requests.approved');
+        Route::get('rejected-requests',[UserRequestController::class,'rejected'])->name('user-requests.rejected');
     });
+    // books issue requests
+    Route::prefix('book-issue')->group(function () {
+        Route::get('/',[BookIssueController::class,'index'])->name('book-issue.index');
+        Route::get('/approve/{id}',[BookIssueController::class,'approve'])->name('book-issue.approve');
+        Route::get('/reject/{id}',[BookIssueController::class,'reject'])->name('book-issue.reject');
+    });
+
+
 });

@@ -7,15 +7,15 @@
         <x-jet-validation-errors class="mb-4" />
 
         @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
+            <div class="mb-4 font-medium text-sm text-red-600">
                 {{ session('status') }}
             </div>
         @endif
 
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('custom.verify') }}">
             @csrf
             <div>
-                <h2 style="text-align: center;font-weight:900">Admin Login</h2>
+                <h2 style="text-align: center;font-weight:900">Login</h2>
             </div>
             <div>
                 <x-jet-label for="email" value="{{ __('Email') }}" />

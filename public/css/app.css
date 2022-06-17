@@ -1410,7 +1410,7 @@ select {
 }
 .border-indigo-400 {
   --tw-border-opacity: 1;
-  border-color: rgb(129 140 248 / var(--tw-border-opacity));
+  border-color: rgb(129 140 248 / var(--tw-border-opacity)) !important;
 }
 .border-gray-200 {
   --tw-border-opacity: 1;
