@@ -7,14 +7,17 @@ use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $data['authors'] = Author::all();
-        return view('authors.index',$data);
+        return view('authors.index', $data);
     }
-    public function create(){
+    public function create()
+    {
         return view('authors.create');
     }
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $request->validate([
             'name' => 'required',
         ]);
@@ -27,11 +30,13 @@ class AuthorController extends Controller
         );
         return redirect()->route('authors.index')->with($notification);
     }
-    public function edit($id){
+    public function edit($id)
+    {
         $data['author'] = Author::find($id);
-        return view('authors.edit',$data);
+        return view('authors.edit', $data);
     }
-    public function update(Request $request,$id){
+    public function update(Request $request, $id)
+    {
         $request->validate([
             'name' => 'required',
         ]);
@@ -44,7 +49,8 @@ class AuthorController extends Controller
         );
         return redirect()->route('authors.index')->with($notification);
     }
-    public function delete($id){
+    public function delete($id)
+    {
         $author = Author::find($id);
         $author->delete();
         $notification = array(
@@ -53,5 +59,4 @@ class AuthorController extends Controller
         );
         return redirect()->route('authors.index')->with($notification);
     }
-
 }

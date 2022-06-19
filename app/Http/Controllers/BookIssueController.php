@@ -10,14 +10,19 @@ class BookIssueController extends Controller
     public function index()
     {
         // dd(BookIssue::first()->students->name);
-        $data['requests'] = BookIssue::orderBy('id','desc')->get();
+        $data['requests'] = BookIssue::where('status','pending')->orderBy('id','desc')->get();
         return view('book-issue.index',$data);
+    }
+
+    public function edit($id){
+        $data['issue'] = BookIssue::find($id);
+        return view('book-issue.edit',$data);
     }
 
     public function approve($id)
     {
         $issue = BookIssue::find($id);
-        $issue->status = 'approved';
+        $issue->status = 'notreturned';
         $issue->save();
         $notification = array(
             'message' => 'Request approved!',
@@ -35,5 +40,17 @@ class BookIssueController extends Controller
             'alert-type' => 'error'
         );
         return redirect()->route('book-issue.index')->with($notification);
+    }
+
+    public function approved()
+    {
+        $data['requests'] = BookIssue::where('status','notreturned')->orWhere('status','returned')->orderBy('id','desc')->get();
+        return view('book-issue.approved',$data);
+    }
+
+    public function rejected()
+    {
+        $data['requests'] = BookIssue::where('status','rejected')->orderBy('id','desc')->get();
+        return view('book-issue.rejected',$data);
     }
 }

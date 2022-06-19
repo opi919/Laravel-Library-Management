@@ -7,14 +7,25 @@ use Illuminate\Http\Request;
 
 class PublisherController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $data['publishers'] = Publisher::all();
-        return view('publishers.index',$data);
+        return view('publishers.index', $data);
     }
-    public function create(){
-        return view('publishers.create');
+    public function create()
+    {
+        if (auth()->user()->role != 'admin') {
+            $nofication = [
+                'message' => 'You are not authorized to perform this action',
+                'alert-type' => 'error'
+            ];
+            return redirect()->back()->with($nofication);
+        } else {
+            return view('publishers.create');
+        }
     }
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $request->validate([
             'name' => 'required|unique:publishers|max:255',
         ]);
@@ -27,11 +38,13 @@ class PublisherController extends Controller
         );
         return redirect()->route('publishers.index')->with($notification);
     }
-    public function edit($id){
+    public function edit($id)
+    {
         $data['publisher'] = Publisher::find($id);
-        return view('publishers.edit',$data);
+        return view('publishers.edit', $data);
     }
-    public function update(Request $request,$id){
+    public function update(Request $request, $id)
+    {
         $request->validate([
             'name' => 'required|unique:publishers|max:255',
         ]);
@@ -44,7 +57,8 @@ class PublisherController extends Controller
         );
         return redirect()->route('publishers.index')->with($notification);
     }
-    public function delete($id){
+    public function delete($id)
+    {
         $publisher = Publisher::find($id);
         $publisher->delete();
         $notification = array(
@@ -53,5 +67,4 @@ class PublisherController extends Controller
         );
         return redirect()->route('publishers.index')->with($notification);
     }
-    
 }

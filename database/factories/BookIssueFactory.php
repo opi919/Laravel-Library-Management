@@ -16,7 +16,7 @@ class BookIssueFactory extends Factory
         return [
             'user_id' => $this->faker->numberBetween(2, 10),
             'book_id' => $this->faker->numberBetween(1, 10),
-            'status' => $this->faker->randomElement(['pending', 'approved', 'rejected']),
+            'status' => $this->faker->randomElement(['pending', 'notreturned', 'rejected','returned']),
             'issue_date' => $this->faker->dateTimeBetween('-7 days', 'now'),
             'return_date' => $this->faker->dateTimeBetween('now', '+7 days'),
         ];

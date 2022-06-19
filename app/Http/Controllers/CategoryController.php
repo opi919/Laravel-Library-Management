@@ -12,7 +12,16 @@ class CategoryController extends Controller
         return view('categories.index',$data);
     }
     public function create(){
-        return view('categories.create');
+        if (auth()->user()->role != 'admin') {
+            $nofication = [
+                'message' => 'You are not authorized to perform this action',
+                'alert-type' => 'error'
+            ];
+            return redirect()->back()->with($nofication);
+        }
+        else{
+            return view('categories.create');
+        }
     }
     public function store(Request $request){
         $request->validate([

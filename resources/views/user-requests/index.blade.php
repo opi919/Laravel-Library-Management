@@ -14,7 +14,9 @@
                             <th>S.No</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th style="width: 20%">Action</th>
+                            @if (Auth::user()->role == 'admin')
+                                <th style="width: 20%">Action</th>
+                            @endif
                         </thead>
                         <tbody>
                             <?php $i = 1; ?>
@@ -23,18 +25,20 @@
                                     <td>{{ $i++ }}</td>
                                     <td>{{ $request->name }}</td>
                                     <td>{{ $request->email }}</td>
-                                    <td class="edit">
-                                        @if ($request->status == 0)
-                                            <a href="{{ route('user-requests.approve', $request->id) }}"
-                                                class="btn btn-warning m-1">Approve</a>
-                                            <a href="{{ route('user-requests.reject', $request->id) }}"
-                                                class="btn btn-danger m-1" id="delete">Reject</a>
-                                        @elseif($request->status == 1)
-                                            <span class="badge badge-success">Approved</span>
-                                        @else
-                                            <span class="badge badge-danger">Rejected</span>
-                                        @endif
-                                    </td>
+                                    @if (Auth::user()->role == 'admin')
+                                        <td class="edit">
+                                            @if ($request->status == 0)
+                                                <a href="{{ route('user-requests.approve', $request->id) }}"
+                                                    class="btn btn-warning m-1">Approve</a>
+                                                <a href="{{ route('user-requests.reject', $request->id) }}"
+                                                    class="btn btn-danger m-1" id="delete">Reject</a>
+                                            @elseif($request->status == 1)
+                                                <span class="badge badge-success">Approved</span>
+                                            @else
+                                                <span class="badge badge-danger">Rejected</span>
+                                            @endif
+                                        </td>
+                                    @endif
                                 </tr>
                             @empty
                                 <tr>

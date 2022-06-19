@@ -20,10 +20,17 @@ class DatabaseSeeder extends Seeder
             'email' => 'khandokermomen919@gmail.com',
             'status' => 1,
         ]);
+        User::factory()->create([
+            'name' => 'Librarian',
+            'role' => 'librarian',
+            'email' => 'lb@lb.com',
+            'status' => 1,
+        ]);
         User::factory(10)->create();
         $this->call(AuthorSeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(PublisherSeeder::class);
         $this->call(BookSeeder::class);
+        $this->call(BookIssueSeeder::class);
     }
 }

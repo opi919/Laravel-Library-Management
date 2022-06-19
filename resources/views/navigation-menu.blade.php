@@ -37,12 +37,6 @@
                     </x-jet-nav-link>
                 </div>
                 @if (Auth::user()->role == 'admin')
-                    {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-jet-nav-link href="{{ route('user-requests.index') }}" :active="request()->routeIs('user-requests.index')">
-                            {{ __('Student Request') }}
-                        </x-jet-nav-link>
-                    </div> --}}
-                    {{-- dropdown-menu --}}
                     @php
                         $prefix = Request::route()->getPrefix();
                     @endphp
@@ -50,7 +44,7 @@
                         <x-jet-dropdown>
                             <x-slot name="trigger">
                                 <button type="button"
-                                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition {{ $prefix == '/user-requests' ? 'border-indigo-400' : '' }}">
+                                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition {{ Request::route()->getPrefix() == '/user-requests' ? 'border-indigo-400' : '' }}">
                                     Student Requests
                                     <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 20 20" fill="currentColor">
@@ -66,7 +60,7 @@
                                 </div>
                                 <div class="py-2">
                                     <x-jet-dropdown-link href="{{ route('user-requests.index') }}">
-                                        {{ __('All Requests') }}
+                                        {{ __('Pending Requests') }}
                                     </x-jet-dropdown-link>
                                 </div>
                                 <div class="py-2">
@@ -82,11 +76,49 @@
                             </x-slot>
                         </x-jet-dropdown>
                     </div>
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-jet-nav-link href="{{ route('book-issue.index') }}" :active="request()->routeIs('book-issue.index')">
-                            {{ __('Books Request') }}
-                        </x-jet-nav-link>
+                    <div class="hidden sm:flex sm:items-center sm:ml-6">
+                        <x-jet-dropdown>
+                            <x-slot name="trigger">
+                                <button type="button"
+                                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition {{ Request::route()->getPrefix() == '/book-issue' ? 'border-indigo-400' : '' }}">
+                                    Book Requests
+                                    <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                            </x-slot>
+                            <x-slot name="content">
+                                <div class="block px-4 py-2 text-xs text-gray-400">
+                                    Manage Requests
+                                </div>
+                                <div class="py-2">
+                                    <x-jet-dropdown-link href="{{ route('book-issue.index') }}">
+                                        {{ __('Pending Requests') }}
+                                    </x-jet-dropdown-link>
+                                </div>
+                                <div class="py-2">
+                                    <x-jet-dropdown-link href="{{ route('book-issue.approved') }}">
+                                        {{ __('Approved Requests') }}
+                                    </x-jet-dropdown-link>
+                                </div>
+                                <div class="py-2">
+                                    <x-jet-dropdown-link href="{{ route('book-issue.rejected') }}">
+                                        {{ __('Rejected Requests') }}
+                                    </x-jet-dropdown-link>
+                                </div>
+                            </x-slot>
+                        </x-jet-dropdown>
                     </div>
+                @endif
+                @if (Auth::user()->role == 'librarian')
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('user-book-requests.index') }}" :active="request()->routeIs('user-book-requests.index')">
+                        {{ __('Request Book') }}
+                    </x-jet-nav-link>
+                </div>
                 @endif
             </div>
 

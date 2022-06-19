@@ -9,7 +9,7 @@ class UserRequestController extends Controller
 {
     public function index()
     {
-        $data['requests'] = User::where('role', 'librarian')->whereBetween('status',[-1,1])->orderBy('id', 'desc')->get();
+        $data['requests'] = User::where('role', 'librarian')->where('status',0)->orderBy('id', 'desc')->get();
         return view('user-requests.index', $data);
     }
     public function approve($id)
