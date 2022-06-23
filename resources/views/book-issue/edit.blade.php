@@ -14,7 +14,7 @@
                 <div class="col-md-12 flex align-middle justify-center">
                     <div class="card rounded" style="width: 30rem">
                         <div class="card-body">
-                            <form action="" method="POST">
+                            <form action="{{ route('book-issue.return',$issue->id) }}" method="POST">
                                 @csrf
                                 <table class="table">
                                     <tbody>

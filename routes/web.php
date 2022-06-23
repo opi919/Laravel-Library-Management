@@ -98,6 +98,7 @@ Route::middleware([
             Route::get('approved-requests', [BookIssueController::class, 'approved'])->name('book-issue.approved');
             Route::get('rejected-requests', [BookIssueController::class, 'rejected'])->name('book-issue.rejected');
             Route::get('/edit/{id}',[BookIssueController::class,'edit'])->name('book-issue.edit');
+            Route::post('/return/{id}',[BookIssueController::class,'return'])->name('book-issue.return');
         });
     });
     // user book requests

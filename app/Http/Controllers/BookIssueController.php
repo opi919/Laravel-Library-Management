@@ -53,4 +53,16 @@ class BookIssueController extends Controller
         $data['requests'] = BookIssue::where('status','rejected')->orderBy('id','desc')->get();
         return view('book-issue.rejected',$data);
     }
+
+    public function return($id){
+        $issue = BookIssue::find($id);
+        $issue->status = 'returned';
+        $issue->save();
+
+        $notification = array(
+            'message' => 'Book Returned successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('book-issue.approved')->with($notification);
+    }
 }

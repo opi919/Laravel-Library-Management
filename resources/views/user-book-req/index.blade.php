@@ -34,6 +34,8 @@
                                             <span class="badge badge-warning">{{ $request->status }}</span>
                                         @elseif ($request->status == 'notreturned')
                                             <span class="badge badge-danger">{{ $request->status }}</span>
+                                        @elseif ($request->status == 'rejected')
+                                            <span class="badge badge-danger">{{ $request->status }}</span>
                                         @else
                                             <span class="badge badge-success">{{ $request->status }}</span>
                                         @endif
