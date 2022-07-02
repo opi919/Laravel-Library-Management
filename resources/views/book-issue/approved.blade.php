@@ -38,8 +38,13 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('book-issue.edit',$request->id) }}" class="btn btn-success m-1">Edit</a>
-                                        <a href="" class="btn btn-danger m-1">Delete</a>
+                                        @if ($request->status == 'notreturned')
+                                            <a href="{{ route('book-issue.edit', $request->id) }}"
+                                                class="btn btn-success m-1">Edit</a>
+                                        @endif
+                                        @if ($request->status=='returned')
+                                        <a href="" class="btn btn-danger m-1" id="delete">Delete</a>
+                                        @endif
                                     </td>
                                 </tr>
                             @empty

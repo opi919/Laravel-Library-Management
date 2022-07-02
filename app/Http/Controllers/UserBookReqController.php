@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\BookIssue;
+use App\Models\Settings;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -67,14 +68,16 @@ class UserBookReqController extends Controller
             ];
             return redirect()->back()->with($nofication);
         }
+        //settings
+        $setting = Settings::latest()->first();
         // carbon local time
         $book->stock = $book->stock - $quantity;
         $book->save();
         $book_issue = new BookIssue();
         $book_issue->user_id = $user_id;
         $book_issue->book_id = $book_id;
-        $book_issue->issue_date = Carbon::now()->format('m-d-Y');
-        $book_issue->return_date = now()->addDays(7)->format('m-d-Y');
+        $book_issue->issue_date = Carbon::now();
+        $book_issue->return_date = now()->addDays($setting->return_days);
         $book_issue->save();
         $nofication = [
             'message' => 'Your request is waiting for approval',

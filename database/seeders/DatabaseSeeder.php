@@ -32,5 +32,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PublisherSeeder::class);
         $this->call(BookSeeder::class);
         $this->call(BookIssueSeeder::class);
+        $this->call(SettingsSeeder::class);
     }
 }

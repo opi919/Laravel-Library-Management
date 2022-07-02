@@ -39,6 +39,10 @@
                                             <td><b>{{ $issue->return_date }}</b></td>
                                         </tr>
                                         <tr>
+                                            <td>Fine(TK): </td>
+                                            <td><b>{{ $issue->fine }}</b></td>
+                                        </tr>
+                                        <tr>
                                             <td>
                                                 <button type="submit" class="btn btn-success"
                                                 style="background-color: #28a745">Return</button>

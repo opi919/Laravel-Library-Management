@@ -7,6 +7,7 @@ use App\Http\Controllers\BookIssueController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PublisherController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\UserBookReqController;
 use App\Http\Controllers\UserRequestController;
 use Illuminate\Support\Facades\Route;
@@ -106,5 +107,10 @@ Route::middleware([
         Route::get('/', [UserBookReqController::class, 'index'])->name('user-book-requests.index');
         Route::get('/create', [UserBookReqController::class, 'create'])->name('user-book-requests.create');
         Route::post('/store/{user_id}', [UserBookReqController::class, 'store'])->name('user-book-requests.store');
+    });
+    //settings
+    Route::prefix('settings')->middleware('isAdmin')->group(function () {
+        Route::get('/', [SettingsController::class, 'index'])->name('settings.index');
+        Route::post('/update/{id}', [SettingsController::class, 'update'])->name('settings.update');
     });
 });

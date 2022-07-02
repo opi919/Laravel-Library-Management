@@ -17,10 +17,10 @@ class CreateBookIssuesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('book_id')->constrained();
-            $table->string('issue_date');
-            $table->string('return_date')->nullable();
+            $table->date('issue_date');
+            $table->date('return_date')->nullable();
             $table->string('status')->default('pending');
-            $table->string('returned_date')->nullable();
+            $table->date('returned_date')->nullable();
             $table->integer('fine')->default(0);
             $table->timestamps();
         });
