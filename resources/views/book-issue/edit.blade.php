@@ -14,7 +14,7 @@
                 <div class="col-md-12 flex align-middle justify-center">
                     <div class="card rounded" style="width: 30rem">
                         <div class="card-body">
-                            <form action="{{ route('book-issue.return',$issue->id) }}" method="POST">
+                            <form action="{{ route('book-issue.return',$issue->id) }}" method="POST" id="return_book">
                                 @csrf
                                 <table class="table">
                                     <tbody>
@@ -44,11 +44,11 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <button type="submit" class="btn btn-success"
+                                                <button type="submit" id="return" class="btn btn-success"
                                                 style="background-color: #28a745">Return</button>
                                             </td>
                                         </tr>
-                                    </tbody>
+                                    </tbody>return
                                 </table>
                         </div>
                     </div>
